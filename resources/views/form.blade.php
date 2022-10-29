@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 
-@section('titel')
+@section('title')
 form
 @endsection
 
@@ -12,35 +12,35 @@ form
   <form method="post" class="form" action="saveData">
     <div class="con">
     <header class="head-form">
-      <h2>FORM</h2>
-      <p>This is a school project</p>
+      <h2>FORMULARI</h2>
+      <p>Un Projecte Per L'escola Pia</p>
     </header>
       @csrf
       <div class="">
         <div class="row g-3 align-items-center">
           <div class="col-auto">
-            <input type="text" id="name" class="form-control" name="name" placeholder="Name" onchange="validateData()" required>
-            <label style="display: block;" class="text-danger" id="messageName">El Nombre esta en blanc</label>
+            <input type="text" id="name" class="form-control" name="name" placeholder="Nom" onblur="validateData()" required>
+            <label style="display: block;" class="text-danger" id="messageName">El nom esta en blanc</label>
           </div>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-auto">
-            <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Cognoms" onchange="validateData()"  required>
-            <label style="display: block;" class="text-danger" id="messageLastName">El cognom no es correcte</label>
+            <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Cognoms" onblur="validateData()"  required>
+            <label style="display: block;" class="text-danger" id="messageLastName">El cognom no esta en blanc</label>
           </div>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-auto">
-            <input type="text" id="NIF" class="form-control" name="NIF" onchange="validateData()" placeholder="NIF" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
-            <label style="display: block;" class="text-danger" id="messageNIF">El DNI no es correcte</label>
+            <input type="text" id="NIF" class="form-control" name="NIF" onblur="validateData()" placeholder="NIF" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
+            <label style="display: block;" class="text-danger" id="messageNIF">El DNI es incorrecte</label>
           </div>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-auto">
             <select id="gender" name="gender">
-              <option value="Male">Hombre</option>
-              <option value="Famale">Mujer</option>
-              <option value="Other">Otro</option>
+              <option value="Male">Home</option>
+              <option value="Famale">Dona</option>
+              <option value="Other">Altre</option>
             </select required>
           </div>
         </div>
@@ -64,31 +64,44 @@ form
 
 <!-- Script -->
 <script language="javascript">
+  var validateNameBoolean=false
+  var validateLastNameBoolean=false
+  var validateNIFBoolean=false
 
   function validateData() {
     if(document.getElementById("name").value!==""){
       document.getElementById("messageName").style.display = "none";
-      document.getElementById("btn").disabled = false;
+      validateNameBoolean=true;
     }else{
       document.getElementById("messageName").style.display = "block";
-      document.getElementById("btn").disabled = true;
+      validateNameBoolean=false;
     }
 
     if(document.getElementById("lastName").value!==""){
       document.getElementById("messageLastName").style.display = "none";  
-      document.getElementById("btn").disabled = false;
+      validateLastNameBoolean=true;
     }else{
       document.getElementById("messageLastName").style.display = "block";
-      document.getElementById("btn").disabled = true;
+      validateLastNameBoolean=false;
     }
 
-    if (!validateNIF()){
-      document.getElementById("messageNIF").style.display = "block";
-      document.getElementById("btn").disabled = true;
+    if (validateNIF()){
+      document.getElementById("messageNIF").style.display = "none";
+      validateNIFBoolean=true;
     }else{
-      document.getElementById("messageNIF").style.display = "none";  
-      document.getElementById("btn").disabled = false;
+      document.getElementById("messageNIF").style.display = "block";  
+      validateNIFBoolean=false;
+      
     }
+
+    if(validateNameBoolean && validateLastNameBoolean && validateNIFBoolean){
+      document.getElementById("btn").disabled = false;
+      document.getElementById("btn").style.background = "#F0F8FF";
+    }else{
+      document.getElementById("btn").disabled = true;
+      document.getElementById("btn").style.background = "#E9967A";
+    }
+
   }
 
   // Acepta NIEs (Extranjeros con X, Y o Z al principio)
@@ -109,13 +122,11 @@ form
           letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
           letra = letra.substring(numero, numero+1);
           if (letra != let) {
-              //alert('Dni erroneo, la letra del NIF no se corresponde');
               return false;
           } else {
             return true;
           }
       }else{
-          //alert('Dni erroneo, formato no válido');
           return false;
       }
   }
@@ -229,7 +240,7 @@ form
       height: 50px;
     
       padding: 0 20px;
-      background: #fff;
+      background: #E9967A;
       border-radius: 5px;
       
       outline: none;

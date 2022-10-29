@@ -11,7 +11,6 @@
     <nav class="navbar bg-light">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1 fs-1">Adrià Cara Roca</span>
-            <a href="storage/app/DataUser.xml">Get Json</a>
         </div>
     </nav>
     <!-header-->

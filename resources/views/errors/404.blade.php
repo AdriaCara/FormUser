@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 
-@section('titel')
+@section('title')
 ERROR 404
 @endsection
 
@@ -13,13 +13,13 @@ ERROR 404
             404
         </h2>
         <h4 data-text="Opps! Page not found">
-            Opps! Page not found
+            Opps! Pagina no trobada
         </h4>
         <p>
-            Sorry, the page you're looking for doesn't exist. If you think something is broken, report a problem.
+            Ho sentim, la pàgina que busques no existeix.
         </p>
         <div class="btns">
-            <a href="form">return home</a>
+            <a href="http://formuser.test/form">Tornar a l'inici</a>
         </div>
     </div>
 </div>

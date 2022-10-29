@@ -11,11 +11,4 @@ class ControllerRoutes extends Controller
         return view('form');
     }
 
-    public function carregarFitxer() {
-
-        return 'storage/uploads/$nomFitxer';
-
-
-    }
-
 }
